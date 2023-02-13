@@ -1,16 +1,29 @@
-const n = 10;
-const array = [];
+rangeSlider = document.getElementById("range-slider");
+numberOfElementsOutput = document.getElementById("elements_num");
+
+let n = rangeSlider.value;
+let array = [];
 
 const container = document.getElementById("container");
 
 init();
 
 function init() {
+  array = [];
+  container.innerHTML = "";
+  numberOfElementsOutput.innerHTML = rangeSlider.value;
+
+  let n = document.getElementById("range-slider").value;
+
   for (let i = 0; i < n; i++) {
     array[i] = Math.random();
   }
   displayArray(array);
 }
+
+rangeSlider.oninput = function () {
+  init();
+};
 
 function play() {
   sorted_array = bubbleSort(array);
