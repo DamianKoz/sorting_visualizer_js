@@ -1,6 +1,8 @@
 // Todos:
 // - Get Algorithm by Choice
 // - Animate transistions and make comparisons blue
+// - Add cool CSS and make it look good on mobile
+// - Fetch Markdown Files
 
 const animationSpeedSlider = document.getElementById("animationSpeed");
 const rangeSlider = document.getElementById("range-slider");
@@ -8,20 +10,26 @@ const numberOfElementstext = document.getElementById("elements_num");
 const algorithmSelection = document.getElementById("algorithmSelection");
 
 let array = [];
+let swaps = [];
+
 let n;
 let algorithm;
 
 const container = document.getElementById("container");
 
+let animationTimeout;
 speeds = { very_slow: 500, slow: 250, fast: 50 };
 // algorithms = { bubblesort: bubbleSort() };
+
+fetch_markdown();
 
 init();
 
 function init() {
   getConfig();
+  stopAnimation();
 
-  array = [];
+  swaps = [];
   container.innerHTML = "";
 
   initArray();
@@ -29,6 +37,8 @@ function init() {
 }
 
 function initArray() {
+  array = [];
+
   for (let i = 0; i < n; i++) {
     array[i] = Math.random();
   }
@@ -50,6 +60,10 @@ algorithmSelection.oninput = function () {
   getConfig();
 };
 
+function stopAnimation() {
+  clearTimeout(animationTimeout);
+}
+
 function play() {
   getConfig();
   const copy_to_sort = [...array];
@@ -66,13 +80,12 @@ function animate(swaps) {
 
   [array[i], array[j]] = [array[j], array[i]];
   displayArray([i, j]);
-  setTimeout(function () {
+  animationTimeout = setTimeout(function () {
     animate(swaps);
   }, animationSpeed);
 }
 
 function bubbleSort(array) {
-  const swaps = [];
   do {
     var swapped = false;
     for (let i = 1; i < array.length; i++) {
@@ -104,13 +117,14 @@ function displayArray(indices) {
 
 function fetch_markdown() {
   // Not working
-
-  url =
-    "https://github.com/DamianKoz/algorithms/blob/main/Sorting/Selection%20Sort/README.md";
+  url = "https://api.github.com/repos/damiankoz/algorithms/contents/README.md";
+  //   url =
+  //     "https://github.com/DamianKoz/algorithms/blob/main/Sorting/Selection%20Sort/README.md";
   fetch(url, {
     method: "GET",
     headers: {
       "Access-Control-Allow-Origin": "*",
+      accept: "application/vnd.github.v3.raw",
     },
   })
     .then((response) => response.blob())
