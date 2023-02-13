@@ -76,6 +76,12 @@ button:active {
 @media (max-width: 600px) {
   .algorithmContainer {
     max-height: 250px;
+    margin-bottom: 0px;
+    margin-top: 1rem;
+  }
+
+  hr {
+    margin-bottom: 10px;
   }
 
   .bar {
