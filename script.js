@@ -21,8 +21,6 @@ let animationTimeout;
 speeds = { very_slow: 500, slow: 250, fast: 50 };
 // algorithms = { bubblesort: bubbleSort() };
 
-fetch_markdown();
-
 init();
 
 function init() {
