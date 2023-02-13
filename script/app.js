@@ -1,7 +1,6 @@
 // Todos:
-// - Animate transistions and make comparisons blue
-// - Add cool CSS and make it look good on mobile
-// - Fetch Markdown Files
+
+// - Fetch Markdown Files and add text to every algorithm
 
 const animationSpeedSlider = document.getElementById("animationSpeed");
 const rangeSlider = document.getElementById("range-slider");

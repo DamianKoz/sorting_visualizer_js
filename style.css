@@ -70,3 +70,9 @@ button:active {
   background-color: var(--main--bg-color);
   color: var(--main-color);
 }
+
+@media (max-width: 600px) {
+  .container {
+    max-height: 90vh;
+  }
+}
