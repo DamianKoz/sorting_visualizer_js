@@ -10,6 +10,15 @@ body {
   align-items: flex-end;
 }
 
+.configContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.animationSpeedDropbow {
+  margin-left: 2rem;
+}
+
 .bar {
   width: 10px;
   margin: 1px;

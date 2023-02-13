@@ -9,17 +9,23 @@
   </head>
   <body>
     <h1>Sorting Visualizer</h1>
-    <div class="slidecontainer">
-      <p>Number of Elements: <span id="elements_num"></span></p>
-      <input
-        type="range"
-        min="1"
-        max="100"
-        value="50"
-        class="slider"
-        id="range-slider"
-      />
+    <div class="configContainer">
+      <div>
+        <p>Number of Elements: <span id="elements_num"></span></p>
+        <input type="range" min="5" max="100" value="20" id="range-slider" />
+      </div>
+
+      <div class="animationSpeedDropbow" id="animationSpeedSlider">
+        <p for="pet-select">Animation Speed:</p>
+
+        <select name="animationSpeed" id="animationSpeed">
+          <option value="very_slow">Very Slow</option>
+          <option value="slow">Slow</option>
+          <option value="fast">Fast</option>
+        </select>
+      </div>
     </div>
+
     <div id="container"></div>
 
     <hr />
