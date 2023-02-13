@@ -1,39 +1,53 @@
+// Todos:
+// - Get Algorithm by Choice
+// - Animate transistions and make comparisons blue
+
 const animationSpeedSlider = document.getElementById("animationSpeed");
 const rangeSlider = document.getElementById("range-slider");
 const numberOfElementstext = document.getElementById("elements_num");
-
-speeds = { very_slow: 500, slow: 250, fast: 50 };
+const algorithmSelection = document.getElementById("algorithmSelection");
 
 let array = [];
-
 let n;
+let algorithm;
 
 const container = document.getElementById("container");
+
+speeds = { very_slow: 500, slow: 250, fast: 50 };
+// algorithms = { bubblesort: bubbleSort() };
 
 init();
 
 function init() {
+  getConfig();
+
   array = [];
   container.innerHTML = "";
 
-  getConfig();
-
-  n = document.getElementById("range-slider").value;
-
-  for (let i = 0; i < n; i++) {
-    array[i] = Math.random();
-  }
+  initArray();
   displayArray(array);
 }
 
+function initArray() {
+  for (let i = 0; i < n; i++) {
+    array[i] = Math.random();
+  }
+}
+
 function getConfig() {
-  n = rangeSlider.value;
+  n = rangeSlider.value; // Number of Elements to sort - Length of array
   numberOfElementstext.innerHTML = rangeSlider.value;
   animationSpeed = speeds[animationSpeedSlider.value];
+  algorithm = algorithmSelection.value;
+  console.log(algorithm);
 }
 
 rangeSlider.oninput = function () {
   init();
+};
+
+algorithmSelection.oninput = function () {
+  getConfig();
 };
 
 function play() {
@@ -45,6 +59,7 @@ function play() {
 
 function animate(swaps) {
   if (swaps.length == 0) {
+    displayArray();
     return;
   }
   const [i, j] = swaps.shift(); // Taking out the first two swapped elements
@@ -85,4 +100,19 @@ function displayArray(indices) {
 
     container.appendChild(bar);
   }
+}
+
+function fetch_markdown() {
+  // Not working
+
+  url =
+    "https://github.com/DamianKoz/algorithms/blob/main/Sorting/Selection%20Sort/README.md";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.blob())
+    .then((result) => console.log(result));
 }

@@ -10,13 +10,25 @@
   <body>
     <h1>Sorting Visualizer</h1>
     <div class="configContainer">
-      <div>
+      <div class="algorithmSelectionDropbox">
+        <p>Sorting Algorithm:</p>
+
+        <select name="algotihmSelection" id="algorithmSelection">
+          <option value="bubblesort">Bubblesort</option>
+          <option value="selectionsort">Selection Sort</option>
+        </select>
+      </div>
+
+      <div class="elementRangeSlider configElement">
         <p>Number of Elements: <span id="elements_num"></span></p>
         <input type="range" min="5" max="100" value="20" id="range-slider" />
       </div>
 
-      <div class="animationSpeedDropbow" id="animationSpeedSlider">
-        <p for="pet-select">Animation Speed:</p>
+      <div
+        class="animationSpeedDropbox configElement"
+        id="animationSpeedSlider"
+      >
+        <p>Animation Speed:</p>
 
         <select name="animationSpeed" id="animationSpeed">
           <option value="very_slow">Very Slow</option>
