@@ -19,7 +19,7 @@ const container = document.getElementById("container");
 
 let animationTimeout;
 speeds = { very_slow: 500, slow: 250, fast: 50 };
-// algorithms = { bubblesort: bubbleSort() };
+algorithms = { bubblesort: bubbleSort };
 
 init();
 
@@ -32,6 +32,14 @@ function init() {
 
   initArray();
   displayArray(array);
+}
+
+function play() {
+  getConfig();
+  const copy_to_sort = [...array];
+  const swaps = algorithms[algorithm](copy_to_sort);
+  // const swaps = bubbleSort(copy_to_sort);
+  animate(swaps);
 }
 
 function initArray() {
@@ -47,7 +55,6 @@ function getConfig() {
   numberOfElementstext.innerHTML = rangeSlider.value;
   animationSpeed = speeds[animationSpeedSlider.value];
   algorithm = algorithmSelection.value;
-  console.log(algorithm);
 }
 
 rangeSlider.oninput = function () {
@@ -60,13 +67,6 @@ algorithmSelection.oninput = function () {
 
 function stopAnimation() {
   clearTimeout(animationTimeout);
-}
-
-function play() {
-  getConfig();
-  const copy_to_sort = [...array];
-  const swaps = bubbleSort(copy_to_sort);
-  animate(swaps);
 }
 
 function animate(swaps) {
