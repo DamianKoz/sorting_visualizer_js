@@ -73,10 +73,10 @@ button:active {
   color: var(--main-color);
 }
 
-@media (max-width: 600px) {
-  .algorithmContainer {
+@media (max-width: 700px) {
+  #algorithmContainer {
     max-height: 250px;
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
     margin-top: 1rem;
   }
 
