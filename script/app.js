@@ -1,5 +1,4 @@
 // Todos:
-// - Get Algorithm by Choice
 // - Animate transistions and make comparisons blue
 // - Add cool CSS and make it look good on mobile
 // - Fetch Markdown Files
@@ -15,7 +14,7 @@ let swaps = [];
 let n;
 let algorithm;
 
-const container = document.getElementById("container");
+const container = document.getElementById("algorithmContainer");
 
 let animationTimeout;
 speeds = { very_slow: 500, slow: 250, fast: 50 };
@@ -81,20 +80,6 @@ function animate(swaps) {
   animationTimeout = setTimeout(function () {
     animate(swaps);
   }, animationSpeed);
-}
-
-function bubbleSort(array) {
-  do {
-    var swapped = false;
-    for (let i = 1; i < array.length; i++) {
-      if (array[i - 1] > array[i]) {
-        swaps.push([i - 1, i]);
-        [array[i - 1], array[i]] = [array[i], array[i - 1]];
-        swapped = true;
-      }
-    }
-  } while (swapped);
-  return swaps;
 }
 
 function displayArray(indices) {
