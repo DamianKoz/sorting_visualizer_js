@@ -92,7 +92,10 @@ function displayArray(move) {
     bar.classList.add("bar");
 
     if (move && move.indices.includes(i)) {
-      bar.style.backgroundColor = move.type == "swap" ? "red" : "blue";
+      bar.style.backgroundColor =
+        move.type == "swap" && animationSpeedSlider.value != "fast"
+          ? "red"
+          : "blue";
     }
 
     container.appendChild(bar);
