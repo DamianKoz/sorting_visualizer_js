@@ -8,7 +8,7 @@ const numberOfElementstext = document.getElementById("elements_num");
 const algorithmSelection = document.getElementById("algorithmSelection");
 
 let array = [];
-let swaps = [];
+let moves = [];
 
 let n;
 let algorithm;
@@ -17,7 +17,7 @@ const container = document.getElementById("algorithmContainer");
 
 let animationTimeout;
 speeds = { very_slow: 500, slow: 250, fast: 50 };
-algorithms = { bubblesort: bubbleSort };
+algorithms = { bubblesort: bubbleSort, insertionsort: insertionSort };
 
 init();
 
@@ -25,19 +25,18 @@ function init() {
   getConfig();
   stopAnimation();
 
-  swaps = [];
+  // moves = [];
   container.innerHTML = "";
 
   initArray();
-  displayArray(array);
+  displayArray();
 }
 
 function play() {
   getConfig();
   const copy_to_sort = [...array];
-  const swaps = algorithms[algorithm](copy_to_sort);
-  // const swaps = bubbleSort(copy_to_sort);
-  animate(swaps);
+  const moves = algorithms[algorithm](copy_to_sort);
+  animate(moves);
 }
 
 function initArray() {
@@ -67,21 +66,24 @@ function stopAnimation() {
   clearTimeout(animationTimeout);
 }
 
-function animate(swaps) {
-  if (swaps.length == 0) {
+function animate(moves) {
+  if (moves.length == 0) {
     displayArray();
     return;
   }
-  const [i, j] = swaps.shift(); // Taking out the first two swapped elements
+  const move = moves.shift(); // Taking out the first two swapped elements
+  const [i, j] = move.indices;
 
-  [array[i], array[j]] = [array[j], array[i]];
-  displayArray([i, j]);
+  if (move.type == "swap") {
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  displayArray(move);
   animationTimeout = setTimeout(function () {
-    animate(swaps);
+    animate(moves);
   }, animationSpeed);
 }
 
-function displayArray(indices) {
+function displayArray(move) {
   container.innerHTML = "";
 
   for (let i = 0; i < array.length; i++) {
@@ -89,8 +91,8 @@ function displayArray(indices) {
     bar.style.height = array[i] * 100 + "%";
     bar.classList.add("bar");
 
-    if (indices && indices.includes(i)) {
-      bar.style.backgroundColor = "red";
+    if (move && move.indices.includes(i)) {
+      bar.style.backgroundColor = move.type == "swap" ? "red" : "blue";
     }
 
     container.appendChild(bar);
